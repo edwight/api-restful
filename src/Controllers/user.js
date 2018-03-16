@@ -5,8 +5,9 @@ const service = require('../Services');
 
 function signUp(req,res){
 	user = new User({
-		user.email:req.body.email,
-		displayName:req.body.displayName
+		email: req.body.email,
+		displayName: req.body.displayName,
+		password: req.body.password
 
 	})
 	user.save((err)=>{

@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt-node')
+const bcrypt = require('bcrypt-nodejs')
 const crypto = require('crypto');
 var userSchema = new Schema({
 	displayName:{type:String},
 	email:{type:String, unique:true,lowercase:true},
 	avatar:{type:String},
 	password:{type:String,select:false},
-	signupDate:{type:Date, default:Date,now()},
+	signupDate:{type:Date, default:Date.now()},
 	lastLogin:{type:Date}
 
 
@@ -15,7 +15,7 @@ var userSchema = new Schema({
 
 userSchema.pre('save',(next)=>{
 	let user = this;
-	(!user.isModified('password')) return next();
+	if(!user.isModified('password')) return next();
 	bcrypt.genSalt(10,(err,salt)=>{
 		if(err) return next();
 		bcrypt.hash(user.password,salt,null,(err,hash)=>{

@@ -2,7 +2,7 @@ var Product = require('../Models/Product');
 
 function getProduct(req,res){
 	let product = req.params.productId;
-	Product.findById(product,(err,product)=>{
+	Product.findById(product, (err,product)=>{
 		if(err){
 			res.status(500).send({msg:`error al realizar la peticion: ${err}`});
 		}

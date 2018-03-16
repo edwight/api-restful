@@ -1,5 +1,6 @@
 const express = require('express');
 const productController = require('../Controllers/product');
+const userCtrl = require('../Controllers/user');
 const api = express.Router();
 const auth = require('../Middlewares/user');
 
@@ -14,7 +15,10 @@ api.put('/product/:productId', productController.updateProduct);
 //product /delete
 api.delete('/product/:productId', productController.deleteProduct);
 
-api.get('/private',user.isAuth,(err,res)=>{
+api.post('/signup', userCtrl.signUp);
+api.post('/signIn', userCtrl.singIn);
+
+api.get('/private',auth,(err,res)=>{
 	res.status(200).send({msg:'tienes acceso'})
 });
 module.exports = api;
